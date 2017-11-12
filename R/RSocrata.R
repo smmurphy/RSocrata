@@ -214,7 +214,7 @@ getContentAsDataFrame <- function(response) {
            if(length(httr::content(response)) == 0) # empty json?
              data.frame() # empty data frame
          else
-           as.data.frame.list(fromJSON(httr::content(response,
+           as.data.frame.list(jsonlite::fromJSON(httr::content(response,
                                                      as = "text",
                                                      type = "application/json",
                                                      encoding = "utf-8")),
