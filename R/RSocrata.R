@@ -253,6 +253,9 @@ getSodaTypes <- function(response) {
 #' requesting a comma-separated download format (.csv suffix), 
 #' May include SoQL parameters, 
 #' but is assumed to not include a SODA offset parameter
+#' @param query - a string with a 
+#' Socrata Open Data Application Program Interface (SODA) query.  This should be 
+#' used if the url is specified as the api end point only.
 #' @param app_token - a string; SODA API token used to query the data 
 #' portal \url{http://dev.socrata.com/consumers/getting-started.html}
 #' @param email - Optional. The email to the Socrata account with read access to the dataset
@@ -280,8 +283,11 @@ getSodaTypes <- function(response) {
 #' @importFrom mime guess_type
 #' @importFrom plyr rbind.fill
 #' @export
-read.socrata <- function(url, app_token = NULL, email = NULL, password = NULL,
+read.socrata <- function(url, query = NULL, app_token = NULL, email = NULL, password = NULL,
                          stringsAsFactors = FALSE) {
+if(!is.null(query)){
+  url <- paste0(url,"?$query=",query)
+}
   validUrl <- validateUrl(url, app_token) # check url syntax, allow human-readable Socrata url
   parsedUrl <- httr::parse_url(validUrl)
   mimeType <- mime::guess_type(parsedUrl$path)

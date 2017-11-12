@@ -4,8 +4,8 @@
 \alias{read.socrata}
 \title{Get a full Socrata data set as an R data frame}
 \usage{
-read.socrata(url, app_token = NULL, email = NULL, password = NULL,
-  stringsAsFactors = FALSE)
+read.socrata(url, query = NULL, app_token = NULL, email = NULL,
+  password = NULL, stringsAsFactors = FALSE)
 }
 \arguments{
 \item{url}{- A Socrata resource URL, 
@@ -14,6 +14,10 @@ or Socrata Open Data Application Program Interface (SODA) query
 requesting a comma-separated download format (.csv suffix), 
 May include SoQL parameters, 
 but is assumed to not include a SODA offset parameter}
+
+\item{query}{- a string with a 
+Socrata Open Data Application Program Interface (SODA) query.  This should be 
+used if the url is specified as the api end point only.}
 
 \item{app_token}{- a string; SODA API token used to query the data 
 portal \url{http://dev.socrata.com/consumers/getting-started.html}}
@@ -50,4 +54,3 @@ nrow(df)
 \author{
 Hugh J. Devlin, Ph. D. \email{Hugh.Devlin@cityofchicago.org}
 }
-
